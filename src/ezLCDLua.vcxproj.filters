@@ -99,10 +99,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Dialogs\lua.ico">
+    <Image Include="Dialogs\ezLCD.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Dialogs\lua.bmp">
+    <Image Include="Dialogs\ezLCD.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

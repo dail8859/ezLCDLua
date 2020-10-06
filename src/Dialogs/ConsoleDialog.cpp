@@ -255,6 +255,7 @@ void ConsoleDialog::updateConsoleCheckMark(bool check) const {
 
 LRESULT CALLBACK ConsoleDialog::inputWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData) {
 	ConsoleDialog *cd = reinterpret_cast<ConsoleDialog *>(dwRefData);
+
 	switch (uMsg) {
 		case WM_GETDLGCODE:
 			return DLGC_WANTARROWS | DLGC_WANTCHARS | DLGC_WANTTAB;
@@ -445,10 +446,10 @@ void ConsoleDialog::display(bool toShow) const {
 }
 
 void ConsoleDialog::setCommandID(int *_cmdID) {
-	 cmdID = _cmdID;
+	cmdID = _cmdID;
 
-	 // Check it for the first time
-	 if (isVisible())
+	// Check it for the first time
+	if (isVisible())
 		 updateConsoleCheckMark(true);
 }
 

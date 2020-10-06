@@ -30,17 +30,11 @@
 
 class LuaConsole final {
 public:
-	explicit LuaConsole(HWND hNotepad);
+	explicit LuaConsole(NppData& nppData, HINSTANCE hInst);
 
 	~LuaConsole() {
 		delete console;
 		delete npp_data;
-		hwnd_notepad = nullptr;
-	}
-
-	void init(HINSTANCE hInst, NppData& nppData) {
-		console->initDialog(hInst, nppData, this);
-		*npp_data = nppData;
 	}
 
 	void setComPort(std::string& port) { this->port = port; }
@@ -57,7 +51,6 @@ public:
 	ConsoleDialog *console;
 private:
 	NppData* npp_data;
-	HWND hwnd_notepad;
 
 	// Autocomplete lists
 	std::vector<std::string> ez_props;

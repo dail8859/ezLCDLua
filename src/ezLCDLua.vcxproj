@@ -250,8 +250,8 @@
     <ResourceCompile Include="Dialogs\Version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Dialogs\lua.bmp" />
-    <Image Include="Dialogs\lua.ico" />
+    <Image Include="Dialogs\ezLCD.bmp" />
+    <Image Include="Dialogs\ezLCD.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

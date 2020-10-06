@@ -26,9 +26,6 @@
 #define INDIC_BRACEHIGHLIGHT INDIC_CONTAINER
 #define INDIC_BRACEBADLIGHT INDIC_CONTAINER + 1
 
-// Extra helper functions not from the IFace tables
-// static const std::vector<std::string> moreSciFuncs = { "append", "findtext", "match", "remove", "set_text_direction", "textrange" };
-
 // Copied from Scintilla
 inline int MakeUpperCase(int ch) {
 	if (ch < 'a' || ch > 'z')
@@ -177,7 +174,10 @@ static void setStyles(GUI::ScintillaWindow &sci) {
 	sci.Call(SCI_STYLESETBOLD, SCE_LUA_WORD6, 1);
 }
 
-LuaConsole::LuaConsole(HWND hNotepad) : console(new ConsoleDialog()), hwnd_notepad(hNotepad), npp_data(new NppData) {
+LuaConsole::LuaConsole(NppData& nppData, HINSTANCE hInst) : console(new ConsoleDialog()), npp_data(new NppData) {
+	console->initDialog(hInst, nppData, this);
+	*npp_data = nppData;
+
 	ez_funcs = {
 		"SetXY",
 		"SetX",
@@ -264,7 +264,6 @@ LuaConsole::LuaConsole(HWND hNotepad) : console(new ConsoleDialog()), hwnd_notep
 }
 
 bool LuaConsole::runStatement(const char* statement) {
-	//mp_consoleDlg->writeError(4, this->port.c_str());
 	std::string str = statement;
 	std::vector<uint8_t> t;
 
@@ -276,8 +275,8 @@ bool LuaConsole::runStatement(const char* statement) {
 	try {
 		serial::Serial my_serial(this->port.c_str(), 115200, serial::Timeout::simpleTimeout(1000));
 		my_serial.write(t);
-
 		t.clear();
+
 		auto bytes_read = my_serial.read(t, 1);
 
 		if (bytes_read == 1) {
@@ -305,7 +304,7 @@ bool LuaConsole::runStatement(const char* statement) {
 
 	}
 	catch (std::exception &e) {
-		MessageBox(hwnd_notepad, GUI::StringFromUTF8(e.what()).c_str(), TEXT("ezLCD Lua"), MB_ICONERROR);
+		MessageBox(npp_data->_nppHandle, GUI::StringFromUTF8(e.what()).c_str(), TEXT("ezLCD Lua"), MB_ICONERROR);
 
 		return false;
 	}

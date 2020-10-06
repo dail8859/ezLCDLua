@@ -29,8 +29,6 @@
 #include "GUI.h"
 
 struct NppData;
-typedef std::basic_string<TCHAR> tstring;
-
 class LuaConsole;
 
 class ConsoleDialog : public StaticDialog {
@@ -62,7 +60,7 @@ protected:
 	INT_PTR CALLBACK run_dlgProc(UINT Message, WPARAM wParam, LPARAM lParam);
 
 private:
-	ConsoleDialog& operator = (const ConsoleDialog&); // assignment operator disabled
+	ConsoleDialog& operator=(const ConsoleDialog&) = delete; // assignment operator disabled
 
 	void createOutputWindow(HWND hParentWindow);
 	void createInputWindow(HWND hParentWindow);
@@ -85,8 +83,8 @@ private:
 	LuaConsole *m_console;
 	std::string m_prompt;
 
-	std::vector<tstring> m_history;
-	tstring m_curLine;
+	std::vector<std::wstring> m_history;
+	std::wstring m_curLine;
 	size_t m_currentHistory;
 
 	HMENU m_hContext;
