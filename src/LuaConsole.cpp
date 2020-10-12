@@ -300,6 +300,8 @@ bool LuaConsole::runStatement(const char* statement) {
 		else {
 			const char* message = "Did not receive response from ezLCD controller board\r\n";
 			console->writeError(strlen(message), message);
+
+			return false;
 		}
 
 	}
