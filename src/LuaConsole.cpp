@@ -248,6 +248,35 @@ LuaConsole::LuaConsole(NppData& nppData, HINSTANCE hInst) : console(new ConsoleD
 		"GetTouchY",
 		"TouchDn",
 		"SetTouchEvent",
+		"RS232Open",
+		"Rs232Close",
+		"Rs232Tx",
+		"Rs232TxStr",
+		"Rs232RxLen",
+		"Rs232Rxgetc",
+		"I2CopenMaster",
+		"I2CWrite",
+		"I2Cread",
+		"SetPinInp",
+		"SetPinsInp",
+		"SetPinOut",
+		"SetPinsOut",
+		"SetPinIntr",
+		"RestorePin",
+		"RestorePins",
+		"Pin",
+		"Pins",
+		"SetDispFrame",
+		"GetDispFrame",
+		"GetNextDispFrame",
+		"SetDrawFrame",
+		"GetDrawFrame",
+		"GetNoOfFrames",
+		"CopyFrame",
+		"MergeFrame",
+		"CopyRect",
+		"MergeRect",
+		"ExitReq"
 	};
 
 	ez_props = {
@@ -279,6 +308,7 @@ bool LuaConsole::runStatement(const char* statement) {
 
 		auto bytes_read = my_serial.read(t, 1);
 
+		// Expect 1 byte return value
 		if (bytes_read == 1) {
 			if (t[0] == RUN_LUA_ERROR) {
 				while (true) {
