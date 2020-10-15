@@ -42,7 +42,7 @@ INT_PTR CALLBACK abtDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 					DestroyWindow(hwndDlg);
 					return true;
 				case IDC_GITHUB:
-					ShellExecute(hwndDlg, TEXT("open"), TEXT("https://github.com/owner/repo/"), NULL, NULL, SW_SHOWNORMAL);
+					ShellExecute(hwndDlg, TEXT("open"), TEXT("https://github.com/dail8859/ezLCDLua/"), NULL, NULL, SW_SHOWNORMAL);
 					return true;
 			}
 		case WM_DESTROY:
