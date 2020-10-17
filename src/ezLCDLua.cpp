@@ -41,6 +41,7 @@ static HINSTANCE hInstance;
 static LuaConsole *luaConsole;
 static bool isReady = false;
 static std::vector<FuncItem> funcItems;
+static ShortcutKey shortcut;
 static toolbarIcons tbiConsoleButton;
 
 
@@ -97,9 +98,14 @@ extern "C" __declspec(dllexport) const wchar_t *getName() {
 }
 
 extern "C" __declspec(dllexport) FuncItem *getFuncsArray(int *nbF) {
+	shortcut._isAlt = TRUE;
+	shortcut._isShift = TRUE;
+	shortcut._isCtrl = FALSE;
+	shortcut._key = 'R';
+
 	// Set up the shortcuts
 	funcItems.emplace_back(FuncItem{ TEXT("Show Console"), showConsole, 0, false, NULL });
-	funcItems.emplace_back(FuncItem{ TEXT("Execute Current File"), executeCurrentFile, 0, false, NULL });
+	funcItems.emplace_back(FuncItem{ TEXT("Execute Current File"), executeCurrentFile, 0, false, &shortcut });
 	funcItems.emplace_back(FuncItem{ TEXT(""), nullptr, 0, false, nullptr }); // separator
 	funcItems.emplace_back(FuncItem{ TEXT("Edit Config File"), editSettings, 0, false, NULL });
 	funcItems.emplace_back(FuncItem{ TEXT("About..."), showAbout, 0, false, NULL });
