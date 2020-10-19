@@ -98,10 +98,10 @@ extern "C" __declspec(dllexport) const wchar_t *getName() {
 }
 
 extern "C" __declspec(dllexport) FuncItem *getFuncsArray(int *nbF) {
-	shortcut._isAlt = TRUE;
-	shortcut._isShift = TRUE;
-	shortcut._isCtrl = FALSE;
-	shortcut._key = 'R';
+	shortcut._isAlt = FALSE;
+	shortcut._isShift = FALSE;
+	shortcut._isCtrl = TRUE;
+	shortcut._key = 'E';
 
 	// Set up the shortcuts
 	funcItems.emplace_back(FuncItem{ TEXT("Show Console"), showConsole, 0, false, NULL });
@@ -179,10 +179,12 @@ static void editSettings() {
 }
 
 static void executeCurrentFile() {
-	const char* doc = (const char*)SendMessage(updateScintilla(), SCI_GETCHARACTERPOINTER, SCI_UNUSED, SCI_UNUSED);
+	HWND current_scintilla = updateScintilla();
+	const char* doc = (const char*)SendMessage(current_scintilla, SCI_GETCHARACTERPOINTER, SCI_UNUSED, SCI_UNUSED);
 
 	if (luaConsole->runStatement(doc) == false) {
 		luaConsole->console->doDialog();
+		SendMessage(current_scintilla, SCI_GRABFOCUS, SCI_UNUSED, SCI_UNUSED);
 	}
 }
 
