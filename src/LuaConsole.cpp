@@ -84,7 +84,7 @@ static bool inline isBrace(int ch) {
 	return strchr("[]{}()", ch) != NULL;
 }
 
-static std::string getRange(GUI::ScintillaWindow *sw, int start, int end) {
+static std::string getRange(GUI::ScintillaWindow *sw, Sci_PositionCR start, Sci_PositionCR end) {
 	if (end <= start) return std::string();
 
 	std::vector<char> buffer(end - start + 1);

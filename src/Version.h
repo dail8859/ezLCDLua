@@ -17,5 +17,5 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#define VERSION_NUM				1,0,0,0
-#define VERSION_TEXT			TEXT("1.0")
+#define VERSION_NUM				1,1,0,0
+#define VERSION_TEXT			TEXT("1.1")
